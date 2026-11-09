@@ -2,6 +2,7 @@
 
 ## Project Structure
 
+```txt
 bilad-analytics-dashboard/
 ├── public/
 ├── src/
@@ -18,3 +19,4 @@ bilad-analytics-dashboard/
 ├── .env.local
 ├── package.json
 └── tailwind.config.js
+```

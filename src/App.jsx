@@ -8,6 +8,7 @@ import { AnalyticsTable } from "./components/AnalyticsTable";
 export function App() {
   const [tourismData, setTourismData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedRegion, setSelectedRegion] = useState("All");
 
   useEffect(() => {
     async function fetchData() {
@@ -44,27 +45,34 @@ export function App() {
     fetchData();
   }, []);
 
-  const totalHotels = tourismData.reduce(
+  const filteredTourismData =
+    selectedRegion === "All"
+      ? tourismData
+      : tourismData.filter(
+          (item) => item.governorates.region === selectedRegion,
+        );
+
+  const totalHotels = filteredTourismData.reduce(
     (acc, curr) => acc + curr.hotels_count,
     0,
   );
-  const totalGuests = tourismData.reduce(
+  const totalGuests = filteredTourismData.reduce(
     (acc, curr) => acc + curr.total_guests,
     0,
   );
-  const totalStays = tourismData.reduce(
+  const totalStays = filteredTourismData.reduce(
     (acc, curr) => acc + curr.overnight_stays,
     0,
   );
-  const totalRevenue = tourismData.reduce(
+  const totalRevenue = filteredTourismData.reduce(
     (acc, curr) => acc + curr.revenue_million_dinars,
     0,
   );
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-bilad-bg flex items-center justify-center text-bilad-accent font-medium">
-        Connecting to Bilad Relational Database...
+      <div className="min-h-screen bg-bilad-bg flex items-center justify-center text-bilad-accent font-semibold tracking-widest text-sm">
+        INITIALIZING BILAD COMMAND CENTER...
       </div>
     );
   }
@@ -81,35 +89,47 @@ export function App() {
   }));
 
   return (
-    <div className="min-h-screen bg-bilad-bg text-slate-100 pb-16">
+    <div className="min-h-screen bg-bilad-bg text-slate-100 pb-20 selection:bg-bilad-accent selection:text-bilad-bg">
       <Header />
-      <main className="max-w-7xl mx-auto px-8">
+      <main className="max-w-7xl mx-auto px-8 pt-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <MetricCard
             title="Total Accommodations"
             value={totalHotels.toLocaleString()}
-            subtitle="Across all 18 governorates"
+            subtitle={
+              selectedRegion === "All"
+                ? "All 18 governorates"
+                : `${selectedRegion} region`
+            }
+            highlight="Active"
           />
           <MetricCard
             title="Total Guests"
             value={totalGuests.toLocaleString()}
             subtitle="Verified annual visitors"
+            highlight="Audited"
           />
           <MetricCard
             title="Overnight Stays"
             value={totalStays.toLocaleString()}
             subtitle="Total bed nights utilized"
+            highlight="Annual"
           />
           <MetricCard
             title="Total Revenue"
             value={`${totalRevenue.toLocaleString()}M`}
             subtitle="In Iraqi Dinars (IQD)"
+            highlight="Gross"
           />
         </div>
 
-        <ChartsSection data={tourismData} />
+        <ChartsSection data={filteredTourismData} />
 
-        <AnalyticsTable data={flattenedTableData} />
+        <AnalyticsTable
+          data={flattenedTableData}
+          selectedRegion={selectedRegion}
+          setSelectedRegion={setSelectedRegion}
+        />
       </main>
     </div>
   );

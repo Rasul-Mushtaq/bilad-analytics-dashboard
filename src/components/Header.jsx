@@ -6,22 +6,13 @@ export function Header() {
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-black tracking-[0.3em] text-bilad-accent text-center sm:text-left">
-            B I Γ A D
+            B I L A D
           </h1>
           <p className="text-xs text-slate-400 tracking-wider uppercase mt-1">
-            National Tourism and Hotel Sector Analytics Command Center 2023
+            National Tourism and Hotel Sector Analytics
           </p>
         </div>
-
-        <div className="flex items-center gap-3">
-          <div className="bg-bilad-bg border border-bilad-border px-4 py-2 rounded-lg text-xs text-slate-300 font-medium">
-            Central Statistical Organization Data
-          </div>
-          <div className="bg-bilad-bg border border-bilad-border px-4 py-2 rounded-lg text-xs text-bilad-accent font-semibold flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-bilad-accent animate-pulse"></span>
-            Live Supabase Feed
-          </div>
-        </div>
+        <div className="flex items-center gap-3"></div>
       </div>
     </header>
   );

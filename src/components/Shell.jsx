@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import { Sidebar } from "./Sidebar";
-import { Header } from "./Header";
 
-export function Shell({ children, activePage, setActivePage }) {
+export function Shell({
+  children,
+  activePage,
+  setActivePage,
+  pageTitle,
+  pageSubtitle,
+}) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-blue-600 selection:text-bilad-bg">
-      {/* Mobile overlay */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
+    <div className="min-h-screen bg-bilad-bg text-bilad-text flex flex-col lg:flex-row">
+      {/* Sidebar Navigation */}
       <Sidebar
         open={sidebarOpen}
         setOpen={setSidebarOpen}
@@ -22,9 +20,21 @@ export function Shell({ children, activePage, setActivePage }) {
         setActivePage={setActivePage}
       />
 
-      <div className="lg:pl-64 relative z-10">
-        <Header onMenuToggle={() => setSidebarOpen((prev) => !prev)} />
-        <main className="max-w-7xl mx-auto px-6 pt-8 pb-16 lg:pt-12 lg:pb-20">
+      {/* Main Content Container */}
+      <div className="flex-1 flex flex-col min-w-0">
+        <main className="max-w-7xl w-full mx-auto px-6 py-10 lg:py-14">
+          {pageTitle && (
+            <div className="mb-8">
+              <h1 className="text-3xl font-black text-bilad-text tracking-tight">
+                {pageTitle}
+              </h1>
+              {pageSubtitle && (
+                <p className="text-bilad-textMuted text-sm mt-1">
+                  {pageSubtitle}
+                </p>
+              )}
+            </div>
+          )}
           {children}
         </main>
       </div>

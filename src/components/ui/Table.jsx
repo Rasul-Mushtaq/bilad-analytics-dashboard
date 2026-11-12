@@ -60,44 +60,44 @@ export function AnalyticsTable({ data, selectedRegion, setSelectedRegion }) {
 
   const sortIcon = (field) => {
     if (sortField !== field) {
-      return <ArrowUpDown className="w-3 h-3 text-bilad-textMuted" />;
+      return <ArrowUpDown className="w-3.5 h-3.5 text-bilad-textMuted" />;
     }
     return sortDirection === "asc" ? (
-      <ArrowUp className="w-3 h-3 text-bilad-accent" />
+      <ArrowUp className="w-3.5 h-3.5 text-bilad-accent" />
     ) : (
-      <ArrowDown className="w-3 h-3 text-bilad-accent" />
+      <ArrowDown className="w-3.5 h-3.5 text-bilad-accent" />
     );
   };
+
   return (
     <div className="bg-bilad-card border border-bilad-border rounded-2xl shadow-bilad overflow-hidden animate-fade-in">
-      <div className="p-6 border-b border-bilad-border flex flex-col lg:flex-row justify-between items-center gap-4 bg-bilad-surface/50">
+      <div className="p-6 border-b border-bilad-border flex flex-col lg:flex-row justify-between items-center gap-4 bg-bilad-surface/60">
         <div>
           <h3 className="text-lg font-bold text-bilad-text mb-1">
             Governorate Statistical Breakdown
           </h3>
           <p className="text-xs text-bilad-textMuted">
-            Comprehensive metrics across all eighteen governorates of Iraq.
+            Comprehensive tourism metrics across all eighteen governorates of
+            Iraq.
           </p>
         </div>
 
         <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
           <div className="relative w-full sm:w-72">
-            <Search
-              className="absolute left-3.5 top-3 h-4 w-4 text-bilad-textMuted"
-            />
+            <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-bilad-textMuted" />
             <input
               type="text"
               placeholder="Search governorate..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-bilad-bg border border-bilad-border rounded-xl pl-10 pr-4 py-3 text-sm text-bilad-text focus:outline-none focus:border-bilad-accent focus:ring-1 focus:ring-bilad-accent transition-colors"
+              className="w-full bg-bilad-bg border border-bilad-border rounded-xl pl-10 pr-4 py-2.5 text-sm font-medium text-bilad-text focus:outline-none focus:border-bilad-accent focus:ring-1 focus:ring-bilad-accent transition-colors"
             />
           </div>
           <Dropdown
             options={REGIONS.map((r) => ({ label: r, value: r }))}
             value={selectedRegion}
             onChange={setSelectedRegion}
-            label="Region"
+            label=""
             className="w-full sm:w-56"
           />
         </div>
@@ -106,29 +106,33 @@ export function AnalyticsTable({ data, selectedRegion, setSelectedRegion }) {
       <div className="overflow-x-auto">
         <table className="w-full text-left">
           <thead>
-            <tr className="text-[10px] font-bold text-bilad-textMuted uppercase tracking-wider bg-bilad-surface/40">
+            <tr className="text-xs font-bold text-bilad-text uppercase tracking-wider bg-bilad-surface border-b border-bilad-border">
               {COLUMNS.map((col) => (
                 <th
                   key={col.key}
                   onClick={() => handleSort(col.key)}
-                  className={`py-4 px-6 cursor-pointer hover:text-bilad-accent transition-colors ${col.numeric ? "text-right" : ""}`}
+                  className={`py-4 px-6 cursor-pointer hover:text-bilad-accent transition-colors ${
+                    col.numeric ? "text-right" : ""
+                  }`}
                   scope="col"
                 >
-                  <div className="flex items-center justify-end gap-2">
+                  <div
+                    className={`flex items-center gap-2 ${col.numeric ? "justify-end" : "justify-start"}`}
+                  >
                     {col.label} {sortIcon(col.key)}
                   </div>
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-bilad-border/30 text-sm">
+          <tbody className="divide-y divide-bilad-border text-sm font-medium">
             {filteredData.length > 0 ? (
               filteredData.map((row, idx) => (
                 <tr
                   key={row.id}
                   className={`transition-colors ${
-                    idx % 2 === 0 ? "bg-bilad-surface/30" : "bg-transparent"
-                  } hover:bg-bilad-border/20`}
+                    idx % 2 === 0 ? "bg-bilad-surface/20" : "bg-transparent"
+                  } hover:bg-bilad-border/30`}
                 >
                   <td className="py-4 px-6 font-bold text-bilad-text">
                     {row.governorate}
@@ -138,16 +142,16 @@ export function AnalyticsTable({ data, selectedRegion, setSelectedRegion }) {
                       {row.region}
                     </Badge>
                   </td>
-                  <td className="py-4 px-6 text-bilad-textMuted text-right font-mono">
+                  <td className="py-4 px-6 text-bilad-text text-right font-mono">
                     {formatNumber(row.hotels_count)}
                   </td>
                   <td className="py-4 px-6 text-bilad-text text-right font-mono font-bold">
                     {formatNumber(row.total_guests)}
                   </td>
-                  <td className="py-4 px-6 text-bilad-textMuted text-right font-mono">
+                  <td className="py-4 px-6 text-bilad-text text-right font-mono">
                     {formatNumber(row.overnight_stays)}
                   </td>
-                  <td className="py-4 px-6 text-bilad-textMuted text-right font-mono">
+                  <td className="py-4 px-6 text-bilad-text text-right font-mono">
                     {formatNumber(row.workforce)}
                   </td>
                   <td className="py-4 px-6 text-bilad-accent text-right font-mono font-bold">
@@ -173,9 +177,10 @@ export function AnalyticsTable({ data, selectedRegion, setSelectedRegion }) {
         </table>
       </div>
 
-      <div className="p-4 bg-bilad-surface/50 border-t border-bilad-border flex items-center justify-between text-xs text-bilad-textMuted font-medium">
+      <div className="p-4 bg-bilad-surface/60 border-t border-bilad-border flex items-center justify-between text-xs text-bilad-text font-medium">
         <span>
-          Displaying {filteredData.length} of {data.length} reporting governorates
+          Displaying {filteredData.length} of {data.length} reporting
+          governorates
         </span>
         <span>Click column headers to sort</span>
       </div>

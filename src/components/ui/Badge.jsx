@@ -2,23 +2,23 @@ import React from "react";
 
 export function Badge({ children, variant = "outline", className = "" }) {
   const base =
-    "inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[10px] font-bold tracking-tighter uppercase";
+    "inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-bold tracking-tight";
   const variants = {
-    outline:
-      "bg-transparent text-bilad-textMuted border border-bilad-border/60",
-    default:
-      "bg-bilad-card text-bilad-textMuted border border-bilad-border/50",
+    outline: "bg-bilad-surface text-bilad-text border border-bilad-border",
+    default: "bg-bilad-card text-bilad-text border border-bilad-border",
     success:
-      "bg-bilad-success/10 text-bilad-success border border-bilad-success/20",
+      "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30",
     warning:
-      "bg-bilad-warning/10 text-bilad-warning border border-bilad-warning/20",
+      "bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30",
     danger:
-      "bg-bilad-danger/10 text-bilad-danger border border-bilad-danger/20",
+      "bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30",
     accent:
-      "bg-bilad-accent/10 text-bilad-accent border border-bilad-accent/20",
+      "bg-sky-500/15 text-sky-600 dark:text-sky-400 border border-sky-500/30",
   };
   return (
-    <span className={`${base} ${variants[variant]} ${className}`}>
+    <span
+      className={`${base} ${variants[variant] || variants.outline} ${className}`}
+    >
       {children}
     </span>
   );

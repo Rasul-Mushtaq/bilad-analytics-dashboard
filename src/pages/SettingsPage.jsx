@@ -1,39 +1,71 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Sun, Moon } from "lucide-react";
 
 export function SettingsPage() {
-  return (
-    <div className="space-y-8 animate-fade-in">
-      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-        <div>
-          <h2 className="text-2xl font-black text-slate-900 tracking-tight">
-            Settings
-          </h2>
-          <p className="text-slate-500 text-sm mt-1">
-            Configure platform preferences and display options.
-          </p>
-        </div>
-      </div>
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("bilad_theme") || "dark",
+  );
+  const [autoSync, setAutoSync] = useState(true);
 
-      <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-bilad max-w-xl">
-        <h3 className="text-lg font-bold text-slate-900 mb-6">Appearance</h3>
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium text-slate-900">Color Theme</p>
-              <p className="text-xs text-slate-500">Deep slate dark mode (active)</p>
-            </div>
-            <span className="text-xs font-bold text-blue-600">Dark</span>
+  useEffect(() => {
+    const root = document.body;
+    if (theme === "light") {
+      root.classList.add("light-theme");
+      localStorage.setItem("bilad_theme", "light");
+    } else {
+      root.classList.remove("light-theme");
+      localStorage.setItem("bilad_theme", "dark");
+    }
+  }, [theme]);
+
+  return (
+    <div className="space-y-6 max-w-2xl animate-fade-in pb-10">
+      <div className="bg-bilad-card border border-bilad-border rounded-2xl p-6 shadow-bilad space-y-6">
+        <h3 className="text-base font-bold text-bilad-text">
+          Appearance & System Preferences
+        </h3>
+
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium text-bilad-text">
+              Interface Theme
+            </p>
+            <p className="text-xs text-bilad-textMuted">
+              Toggle between dark and light mode
+            </p>
           </div>
-          <div className="h-px bg-bilad-border my-4" />
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium text-slate-900">Data Refresh</p>
-              <p className="text-xs text-slate-500">Auto-refresh survey data</p>
-            </div>
-            <div className="relative w-10 h-6 rounded-full bg-bilad-border">
-              <span className="absolute left-[2px] top-[2px] w-4 h-4 rounded-full bg-white transition-all" />
-            </div>
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-bilad-surface border border-bilad-border text-bilad-accent text-xs font-bold hover:bg-bilad-border/30 transition-colors cursor-pointer"
+          >
+            {theme === "dark" ? (
+              <Moon className="w-4 h-4" />
+            ) : (
+              <Sun className="w-4 h-4 text-amber-500" />
+            )}
+            {theme === "dark" ? "Dark Mode" : "Light Mode"}
+          </button>
+        </div>
+
+        <div className="h-px bg-bilad-border" />
+
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium text-bilad-text">
+              Supabase Auto-Sync
+            </p>
+            <p className="text-xs text-bilad-textMuted">
+              Automatically sync survey statistics on year selection
+            </p>
           </div>
+          <button
+            onClick={() => setAutoSync(!autoSync)}
+            className={`w-12 h-6 rounded-full transition-colors relative cursor-pointer ${autoSync ? "bg-bilad-accent" : "bg-bilad-border"}`}
+          >
+            <span
+              className={`absolute top-1 w-4 h-4 rounded-full bg-bilad-bg transition-transform ${autoSync ? "right-1" : "left-1"}`}
+            />
+          </button>
         </div>
       </div>
     </div>

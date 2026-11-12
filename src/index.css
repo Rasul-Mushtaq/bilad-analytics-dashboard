@@ -19,37 +19,53 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: #1e3a5f #060f1e;
-  }
-
-  *::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  *::-webkit-scrollbar-track {
-    background: #060f1e;
-  }
-
-  *::-webkit-scrollbar-thumb {
-    background: #1e3a5f;
-    border-radius: 4px;
-  }
-
-  *::-webkit-scrollbar-thumb:hover {
-    background: #2d4a73;
-  }
-
-  ::selection {
-    background: #38bdf8;
-    color: #060f1e;
+  /* Balanced, High-Contrast Light Theme Overrides */
+  body.light-theme {
+    background-color: #f1f5f9;
+    color: #0f172a;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Light theme high-contrast token overrides */
+.light-theme .bg-bilad-bg {
+  background-color: #f1f5f9 !important;
+}
+.light-theme .bg-bilad-surface {
+  background-color: #e2e8f0 !important;
+}
+.light-theme .bg-bilad-card {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+.light-theme .border-bilad-border {
+  border-color: #cbd5e1 !important;
+}
+.light-theme .text-bilad-text {
+  color: #0f172a !important;
+}
+.light-theme .text-bilad-textMuted {
+  color: #334155 !important;
+}
+.light-theme aside.bg-bilad-surface\/70 {
+  background-color: #e2e8f0 !important;
+  border-right-color: #cbd5e1 !important;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: inherit;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 4px;
 }

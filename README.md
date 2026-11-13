@@ -102,7 +102,7 @@ VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-4. Set up the database by running the relational SQL setup scripts provided in the project documentation within your Supabase SQL editor.
+4. Set up the database by running the relational SQL setup scripts.
 
 ## Running Locally
 

@@ -6,29 +6,59 @@ The Bilad analytics dashboard is a web application designed to explore and visua
 
 ```txt
 bilad-analytics-dashboard/
-├── public/
-├── src/
-│ ├── components/
-│ │ ├── Header.jsx
-│ │ ├── MetricCard.jsx
-│ │ ├── ChartsSection.jsx
-│ │ └── AnalyticsTable.jsx
-│ ├── lib/
-│ │ └── supabase.js
-│ ├── App.jsx
-│ ├── index.css
-│ └── main.jsx
-├── .env.local
+├── README.md
+├── index.html
 ├── package.json
-└── tailwind.config.js
+├── postcss.config.js
+├── tailwind.config.js
+├── vite.config.js
+└── src/
+    ├── App.jsx
+    ├── index.css
+    ├── main.jsx
+    ├── components/
+    │   ├── AnalyticsTable.jsx
+    │   ├── Header.jsx
+    │   ├── MetricCard.jsx
+    │   ├── Shell.jsx
+    │   ├── Sidebar.jsx
+    │   ├── charts/
+    │   │   ├── ChartCard.jsx
+    │   │   ├── FinancialChart.jsx
+    │   │   ├── GuestVolumeChart.jsx
+    │   │   ├── HorizontalBarChart.jsx
+    │   │   └── WorkforceChart.jsx
+    │   ├── layout/
+    │   │   ├── Header.jsx
+    │   │   ├── Shell.jsx
+    │   │   └── Sidebar.jsx
+    │   └── ui/
+    │       ├── Badge.jsx
+    │       ├── Dropdown.jsx
+    │       ├── formatters.js
+    │       ├── KpiCard.jsx
+    │       ├── Table.jsx
+    │       └── Tabs.jsx
+    ├── data/
+    │   ├── governorates.js
+    │   └── mockTourism.js
+    ├── lib/
+    │   ├── dataService.js
+    │   └── supabase.js
+    └── pages/
+        ├── AnalyticsPage.jsx
+        ├── OverviewPage.jsx
+        ├── RegionsPage.jsx
+        └── SettingsPage.jsx
+
 ```
 
 ## Key Features
 
-- National overview tracking total accommodations, annual guests, overnight stays, and sector revenues.
-- Relational database architecture hosted on Supabase, supporting multi-year comparisons and facility classifications.
-- Interactive data visualizations built with Recharts, highlighting regional visitor volumes and structural metrics.
-- Responsive user interface styled with Tailwind CSS, featuring a dark theme tailored for analytical data displays.
+- **Overview Section:** National overview tracking total accommodations, annual guests, overnight stays, and sector revenues.
+- **Analytics Section:** Interactive data visualizations built with Recharts, highlighting regional visitor volumes and structural metrics.
+- **Regions / Governorates Section:** Analytics table showing key features for each governorate like `Accommodations`, `Annual Guests`, `Overnight Stays`, and more.
+- **Settings Menu:** Configure platform for theme display (dark mode & light mode) and auto-sync to database.
 
 ## Tech Stack
 
